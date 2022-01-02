@@ -1,0 +1,11 @@
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\bin\Debug\net5.0\RubiksCube.deps.json
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\bin\Debug\net5.0\RubiksCube.dll
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\bin\Debug\net5.0\ref\RubiksCube.dll
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\bin\Debug\net5.0\RubiksCube.pdb
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.AssemblyInfoInputs.cache
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.AssemblyInfo.cs
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.csproj.CoreCompileInputs.cache
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.dll
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\ref\RubiksCube.dll
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.pdb

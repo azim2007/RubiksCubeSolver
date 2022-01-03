@@ -13,14 +13,14 @@ namespace RubiksCube
     }
     public class Side
     {
-        public Color upEdge;
-        public Color rightEdge;
-        public Color downEdge;
-        public Color leftEdge;
-        public Color upRightAngle;
-        public Color upLeftAngle;
-        public Color downLeftAngle;
-        public Color downRightAngle;
+        public Color upEdge = Color.white;
+        public Color rightEdge = Color.white;
+        public Color downEdge = Color.white;
+        public Color leftEdge = Color.white;
+        public Color upRightAngle = Color.white;
+        public Color upLeftAngle = Color.white;
+        public Color downLeftAngle = Color.white;
+        public Color downRightAngle = Color.white;
         public void ClockwiseTurn()
         {
             Color swap = upEdge;
@@ -65,12 +65,12 @@ namespace RubiksCube
     }
     public class Cube
     {
-        public Side whiteSide;
-        public Side yellowSide;
-        public Side greenSide;
-        public Side blueSide;
-        public Side orangeSide;
-        public Side redSide;
+        public Side whiteSide = new Side();
+        public Side yellowSide = new Side();
+        public Side greenSide = new Side();
+        public Side blueSide = new Side();
+        public Side orangeSide = new Side();
+        public Side redSide = new Side();
         public string R()
         {
             orangeSide.ClockwiseTurn();

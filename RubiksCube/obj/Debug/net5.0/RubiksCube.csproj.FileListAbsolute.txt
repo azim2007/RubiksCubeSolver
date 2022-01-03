@@ -9,3 +9,4 @@ C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksC
 C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.dll
 C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\ref\RubiksCube.dll
 C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.pdb
+C:\Users\79120\source\repos\RubicsCubeSolver\RubiksCube\obj\Debug\net5.0\RubiksCube.csproj.AssemblyReference.cache

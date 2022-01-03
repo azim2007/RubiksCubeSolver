@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "RubicsCubeSolver/1.0.0": {
+        "dependencies": {
+          "RubiksCube": "1.0.0"
+        },
         "runtime": {
           "RubicsCubeSolver.dll": {}
+        }
+      },
+      "RubiksCube/1.0.0": {
+        "runtime": {
+          "RubiksCube.dll": {}
         }
       }
     }
   },
   "libraries": {
     "RubicsCubeSolver/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RubiksCube/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

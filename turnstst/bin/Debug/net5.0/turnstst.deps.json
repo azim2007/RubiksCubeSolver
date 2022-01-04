@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "turnstst/1.0.0": {
+        "dependencies": {
+          "RubiksCube": "1.0.0"
+        },
+        "runtime": {
+          "turnstst.dll": {}
+        }
+      },
+      "RubiksCube/1.0.0": {
+        "runtime": {
+          "RubiksCube.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "turnstst/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RubiksCube/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

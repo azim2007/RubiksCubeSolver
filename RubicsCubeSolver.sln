@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubicsCubeSolver", "RubicsCubeSolver\RubicsCubeSolver.csproj", "{0459B76E-80C6-450A-B1B2-57A02B79ECA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RubicsCubeSolver", "RubicsCubeSolver\RubicsCubeSolver.csproj", "{0459B76E-80C6-450A-B1B2-57A02B79ECA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubiksCube", "RubiksCube\RubiksCube.csproj", "{385B5C3B-180F-46C0-83CF-97EA301FB933}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RubiksCube", "RubiksCube\RubiksCube.csproj", "{385B5C3B-180F-46C0-83CF-97EA301FB933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "turnstst", "turnstst\turnstst.csproj", "{F069A928-F319-4017-AB45-FC5CF482BE3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{385B5C3B-180F-46C0-83CF-97EA301FB933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385B5C3B-180F-46C0-83CF-97EA301FB933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385B5C3B-180F-46C0-83CF-97EA301FB933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F069A928-F319-4017-AB45-FC5CF482BE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F069A928-F319-4017-AB45-FC5CF482BE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F069A928-F319-4017-AB45-FC5CF482BE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F069A928-F319-4017-AB45-FC5CF482BE3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -200,21 +200,9 @@ namespace RubiksCube
         public string U()
         {
             yellowSide.ClockwiseTurn();
-            Color swap = greenSide.upRightAngle;
-            greenSide.upRightAngle = orangeSide.upRightAngle;
-            orangeSide.upRightAngle = blueSide.downLeftAngle;
-            blueSide.downLeftAngle = redSide.upRightAngle;
-            redSide.upRightAngle = swap;
-            swap = greenSide.upLeftAngle;
-            greenSide.upLeftAngle = orangeSide.upLeftAngle;
-            orangeSide.upLeftAngle = blueSide.downRightAngle;
-            blueSide.downRightAngle = redSide.upLeftAngle;
-            redSide.upRightAngle = swap;
-            swap = greenSide.upEdge;
-            greenSide.upEdge = orangeSide.upEdge;
-            orangeSide.upEdge = blueSide.downEdge;
-            blueSide.downEdge = redSide.upEdge;
-            redSide.upEdge = swap;
+            UContr();
+            UContr();
+            UContr();
             return "U ";
         } 
         public string UContr()
@@ -366,24 +354,8 @@ namespace RubiksCube
         public string FDouble()
         {
             greenSide.DoubleTurn();
-            Color swap = yellowSide.downLeftAngle;
-            yellowSide.downLeftAngle = whiteSide.upRightAngle;
-            whiteSide.upRightAngle = swap;
-            swap = orangeSide.upLeftAngle;
-            orangeSide.upLeftAngle = redSide.downRightAngle;
-            redSide.downRightAngle = swap;
-            swap = yellowSide.downRightAngle;
-            yellowSide.downRightAngle = whiteSide.upLeftAngle;
-            whiteSide.upLeftAngle = swap;
-            swap = orangeSide.downLeftAngle;
-            orangeSide.downLeftAngle = redSide.upRightAngle;
-            redSide.upRightAngle = swap;
-            swap = yellowSide.downEdge;
-            yellowSide.downEdge = whiteSide.upEdge;
-            whiteSide.upEdge = swap;
-            swap = orangeSide.leftEdge;
-            orangeSide.leftEdge = redSide.rightEdge;
-            redSide.rightEdge = swap;
+            F();
+            F();
             return "F2";
         }
         public string B()

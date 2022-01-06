@@ -65,7 +65,7 @@ namespace turnstst
             PrintCube(ref cube);
             Console.WriteLine();
             cube2 = cube;
-            cube2.U();
+            cube2.DDouble();
             PrintCube(ref cube2);
             Console.WriteLine();
             for (int j = 0; j < 6; j++)
@@ -80,7 +80,7 @@ namespace turnstst
             PrintCube(ref cube);
             Console.WriteLine();
             cube2 = cube;
-            cube2.U();
+            cube2.DDouble();
             PrintCube(ref cube2);
         }
     }

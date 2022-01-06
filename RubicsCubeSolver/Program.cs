@@ -135,11 +135,15 @@ namespace RubicsCubeSolver
             {
                 Console.WriteLine("Ваш куб собран!");
             }
-            CrossOnOppositeSideSolve(ref cube, ref solution);
-            CrossOnOppositeSideSolve(ref cube, ref solution);
-            CrossOnOppositeSideSolve(ref cube, ref solution);
-            CrossOnOppositeSideSolve(ref cube, ref solution);
+            for(int i = 0; i < 4; i++)
+            {
+                CrossOnOppositeSideSolve(ref cube, ref solution);
+            }
             CrossSolve(ref cube, ref solution);
+            for (int i = 0; i < 4; i++)
+            {
+                WhiteSideSolve(ref cube, ref solution);
+            }
             PrintSolution(ref solution);
             OptimizeSolution(ref solution);
             Console.WriteLine();
@@ -388,20 +392,226 @@ namespace RubicsCubeSolver
                 }
             }
         }
+        static void WhiteAnglesToRightCheck(ref Cube cube, ref List<string> solution)
+        {
+            if (cube.yellowSide.downRightAngle == Color.orange)
+            {
+                solution.Add(cube.R());
+                solution.Add(cube.U());
+                solution.Add(cube.RContr());
+            }
+            else if (cube.yellowSide.downRightAngle == Color.blue)
+            {
+                solution.Add(cube.UContr());
+                solution.Add(cube.B());
+                solution.Add(cube.U());
+                solution.Add(cube.BContr());
+            }
+            else if (cube.yellowSide.downRightAngle == Color.red)
+            {
+                solution.Add(cube.UDouble());
+                solution.Add(cube.L());
+                solution.Add(cube.U());
+                solution.Add(cube.LContr());
+            }
+            else if (cube.yellowSide.downRightAngle == Color.green)
+            {
+                solution.Add(cube.U());
+                solution.Add(cube.F());
+                solution.Add(cube.U());
+                solution.Add(cube.FContr());
+            }
+        }
+        static void WhiteAnglesToLeftCheck(ref Cube cube, ref List<string> solution)
+        {
+            if (cube.yellowSide.downRightAngle == Color.green)
+            {
+                solution.Add(cube.FContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.F());
+            }
+            else if (cube.yellowSide.downRightAngle == Color.orange)
+            {
+                solution.Add(cube.UContr());
+                solution.Add(cube.RContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.R());
+            }
+            else if (cube.yellowSide.downRightAngle == Color.blue)
+            {
+                solution.Add(cube.UDouble());
+                solution.Add(cube.BContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.B());
+            }
+            else if (cube.yellowSide.downRightAngle == Color.red)
+            {
+                solution.Add(cube.U());
+                solution.Add(cube.LContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.L());
+            }
+        }
+        static void WhiteAnglesToUpCheck(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.greenSide.upRightAngle == Color.orange)
+            {
+                solution.Add(cube.R());
+                solution.Add(cube.UContr());
+                solution.Add(cube.RContr());
+                solution.Add(cube.UDouble());
+                solution.Add(cube.R());
+                solution.Add(cube.U());
+                solution.Add(cube.RContr());
+            }
+            else if(cube.greenSide.upRightAngle == Color.blue)
+            {
+                solution.Add(cube.UContr());
+                solution.Add(cube.B());
+                solution.Add(cube.UContr());
+                solution.Add(cube.BContr());
+                solution.Add(cube.UDouble());
+                solution.Add(cube.B());
+                solution.Add(cube.U());
+                solution.Add(cube.BContr());
+            }
+            else if (cube.greenSide.upRightAngle == Color.red)
+            {
+                solution.Add(cube.UDouble());
+                solution.Add(cube.L());
+                solution.Add(cube.UContr());
+                solution.Add(cube.LContr());
+                solution.Add(cube.UDouble());
+                solution.Add(cube.L());
+                solution.Add(cube.U());
+                solution.Add(cube.LContr());
+            }
+            else if (cube.greenSide.upRightAngle == Color.green)
+            {
+                solution.Add(cube.U());
+                solution.Add(cube.F());
+                solution.Add(cube.UContr());
+                solution.Add(cube.FContr());
+                solution.Add(cube.UDouble());
+                solution.Add(cube.F());
+                solution.Add(cube.U());
+                solution.Add(cube.FContr());
+            }
+        }
         static void WhiteSideSolve(ref Cube cube, ref List<string> solution)
         {
             if(cube.orangeSide.upLeftAngle == Color.white)
             {
-                if(cube.yellowSide.downRightAngle == Color.orange)
-                {
-                    solution.Add(cube.R());
-                    solution.Add(cube.U());
-                    solution.Add(cube.RContr());
-                }
-                else if(cube.yellowSide.downRightAngle == Color.blue)
-                {
-
-                }
+                WhiteAnglesToRightCheck(ref cube, ref solution);
+            }
+            else if(cube.greenSide.upLeftAngle == Color.white)
+            {
+                solution.Add(cube.UContr());
+                WhiteAnglesToRightCheck(ref cube, ref solution);
+            }
+            else if(cube.redSide.upLeftAngle == Color.white)
+            {
+                solution.Add(cube.UDouble());
+                WhiteAnglesToRightCheck(ref cube, ref solution);
+            }
+            else if(cube.blueSide.downRightAngle == Color.white)
+            {
+                solution.Add(cube.U());
+                WhiteAnglesToRightCheck(ref cube, ref solution);
+            }
+            else if (cube.greenSide.upRightAngle == Color.white)
+            {
+                WhiteAnglesToLeftCheck(ref cube, ref solution);
+            }
+            else if (cube.redSide.upRightAngle == Color.white)
+            {
+                solution.Add(cube.UContr());
+                WhiteAnglesToLeftCheck(ref cube, ref solution);
+            }
+            else if (cube.blueSide.downLeftAngle == Color.white)
+            {
+                solution.Add(cube.UDouble());
+                WhiteAnglesToLeftCheck(ref cube, ref solution);
+            }
+            else if (cube.orangeSide.upRightAngle == Color.white)
+            {
+                solution.Add(cube.U());
+                WhiteAnglesToLeftCheck(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.downRightAngle == Color.white)
+            {
+                WhiteAnglesToUpCheck(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upRightAngle == Color.white)
+            {
+                solution.Add(cube.U());
+                WhiteAnglesToUpCheck(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upLeftAngle == Color.white)
+            {
+                solution.Add(cube.UDouble());
+                WhiteAnglesToUpCheck(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.downLeftAngle == Color.white)
+            {
+                solution.Add(cube.UContr());
+                WhiteAnglesToUpCheck(ref cube, ref solution);
+            }
+            else if(cube.orangeSide.downLeftAngle == Color.white || (cube.whiteSide.upRightAngle == Color.white && cube.orangeSide.downLeftAngle != Color.orange))
+            {
+                solution.Add(cube.R());
+                solution.Add(cube.U());
+                solution.Add(cube.RContr());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if (cube.greenSide.downLeftAngle == Color.white || (cube.whiteSide.upLeftAngle == Color.white && cube.greenSide.downLeftAngle != Color.green))
+            {
+                solution.Add(cube.F());
+                solution.Add(cube.U());
+                solution.Add(cube.FContr());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if (cube.redSide.downLeftAngle == Color.white || (cube.whiteSide.downLeftAngle == Color.white && cube.redSide.downLeftAngle != Color.red))
+            {
+                solution.Add(cube.L());
+                solution.Add(cube.U());
+                solution.Add(cube.LContr());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if (cube.blueSide.upRightAngle == Color.white || (cube.whiteSide.downRightAngle == Color.white && cube.blueSide.upRightAngle != Color.blue))
+            {
+                solution.Add(cube.B());
+                solution.Add(cube.U());
+                solution.Add(cube.BContr());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if(cube.greenSide.downRightAngle == Color.white)
+            {
+                solution.Add(cube.FContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.F());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if (cube.redSide.downRightAngle == Color.white)
+            {
+                solution.Add(cube.LContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.L());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if (cube.blueSide.upLeftAngle == Color.white)
+            {
+                solution.Add(cube.BContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.B());
+                WhiteSideSolve(ref cube, ref solution);
+            }
+            else if (cube.orangeSide.downRightAngle == Color.white)
+            {
+                solution.Add(cube.RContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.R());
+                WhiteSideSolve(ref cube, ref solution);
             }
         }
     }

@@ -156,7 +156,7 @@ namespace RubiksCube
         }
         public string LContr()
         {
-            redSide.ClockwiseTurn();
+            redSide.ContrClockwiseTurn();
             Color swap = greenSide.upLeftAngle;
             greenSide.upLeftAngle = whiteSide.upLeftAngle;
             whiteSide.upLeftAngle = blueSide.upLeftAngle;

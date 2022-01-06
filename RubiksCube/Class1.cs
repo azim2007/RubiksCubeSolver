@@ -199,7 +199,6 @@ namespace RubiksCube
         }
         public string U()
         {
-            yellowSide.ClockwiseTurn();
             UContr();
             UContr();
             UContr();
@@ -290,7 +289,7 @@ namespace RubiksCube
         }
         public string DDouble()
         {
-            yellowSide.DoubleTurn();
+            whiteSide.DoubleTurn();
             Color swap = greenSide.downRightAngle;
             greenSide.downRightAngle = blueSide.upLeftAngle;
             blueSide.upLeftAngle = swap;
@@ -353,7 +352,7 @@ namespace RubiksCube
         }
         public string FDouble()
         {
-            greenSide.DoubleTurn();
+
             F();
             F();
             return "F2";
@@ -400,7 +399,7 @@ namespace RubiksCube
         }
         public string BDouble()
         {
-            greenSide.DoubleTurn();
+            blueSide.DoubleTurn();
             Color swap = yellowSide.upLeftAngle;
             yellowSide.upLeftAngle = whiteSide.downRightAngle;
             whiteSide.downRightAngle = swap;

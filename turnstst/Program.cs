@@ -65,10 +65,23 @@ namespace turnstst
             PrintCube(ref cube);
             Console.WriteLine();
             cube2 = cube;
-            cube2.RDouble();
+            cube2.U();
             PrintCube(ref cube2);
             Console.WriteLine();
-            
+            for (int j = 0; j < 6; j++)
+            {
+                colors[j] = new Color[8];
+                for (int i = 0; i < 8; i++)
+                {
+                    colors[j][i] = (Color)j;
+                }
+            }
+            InputCube(colors, ref cube);
+            PrintCube(ref cube);
+            Console.WriteLine();
+            cube2 = cube;
+            cube2.U();
+            PrintCube(ref cube2);
         }
     }
 }

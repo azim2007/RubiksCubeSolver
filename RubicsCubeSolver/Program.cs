@@ -55,6 +55,65 @@ namespace RubicsCubeSolver
             PrintSide(ref cube.orangeSide);
             PrintSide(ref cube.redSide);
         }
+        static void PrintSolution(ref List<string> solution)
+        {
+            for(int i = 0; i < solution.Count; i++)
+            {
+                Console.Write(solution[i] + " ");
+            }
+        }
+        static void OptimizeSolution(ref List<string> solution)
+        {
+            for(int i = 0; i < solution.Count - 1; i++)
+            {
+                if(solution[i][0] == solution[i + 1][0])
+                {
+                    int delta;
+                    if(solution[i][1] == ' ')
+                    {
+                        delta = 1;
+                    }
+                    else if(solution[i][1] == '2')
+                    {
+                        delta = 2;
+                    }
+                    else
+                    {
+                        delta = -1;
+                    }
+                    if(solution[i + 1][1] == ' ')
+                    {
+                        delta = delta + 1;
+                    }
+                    else if(solution[i + 1][1] == '2')
+                    {
+                        delta = delta + 2;
+                    }
+                    else
+                    {
+                        delta = delta - 1;
+                    }
+                    solution.RemoveAt(i + 1);
+                    if (delta == 0 || delta == 4)
+                    {
+                        solution.RemoveAt(i);
+                    }
+                    else if (delta == 1 || delta == 5)
+                    {
+                        solution[i] = Convert.ToString(solution[i][0]) + " ";
+                    }
+                    else if (delta == 2 || delta == -2)
+                    {
+                        solution[i] = Convert.ToString(solution[i][0]) + "2";
+                    }
+                    else if (delta == -1 || delta == 3)
+                    {
+                        solution[i] = Convert.ToString(solution[i][0]) + "\'";
+                    }
+                    i--;
+                }
+            }
+        }
         static void Main(string[] args)
         {
             Cube cube = new Cube();
@@ -77,22 +136,21 @@ namespace RubicsCubeSolver
                 Console.WriteLine("Ваш куб собран!");
             }
             CrossOnOppositeSideSolve(ref cube, ref solution);
-            PrintCube(ref cube);
-            Console.WriteLine();
             CrossOnOppositeSideSolve(ref cube, ref solution);
-            PrintCube(ref cube);
-            Console.WriteLine();
             CrossOnOppositeSideSolve(ref cube, ref solution);
-            PrintCube(ref cube);
-            Console.WriteLine();
             CrossOnOppositeSideSolve(ref cube, ref solution);
-            PrintCube(ref cube);
-            Console.WriteLine();
             CrossSolve(ref cube, ref solution);
-            for(int i = 0; i < solution.Count; i++)
-            {
-                Console.Write(solution[i] + " ");
-            }
+            PrintSolution(ref solution);
+            OptimizeSolution(ref solution);
+            Console.WriteLine();
+            PrintSolution(ref solution);
+        }
+        static void PifPaf(ref Cube cube, ref List<string> solution)
+        {
+            solution.Add(cube.R());
+            solution.Add(cube.U());
+            solution.Add(cube.RContr());
+            solution.Add(cube.UContr());
         }
         static bool Checking(Cube cube)
         {
@@ -300,37 +358,50 @@ namespace RubicsCubeSolver
             }
             if (Checking(cube))
             {
-                for (int i = 0; i < solution.Count; i++)
-                {
-                    Console.Write(solution[i] + " ");
-                }
+                PrintSolution(ref solution);
             }
         }
         static void CrossSolve(ref Cube cube, ref List<string> solution)
         {
-            for(int i = 0; i < 4;)
+            while(cube.whiteSide.upEdge != Color.white)
             {
                 if (cube.greenSide.upEdge == Color.green && cube.yellowSide.downEdge == Color.white)
                 {
                     solution.Add(cube.FDouble());
-                    i++;
                 }
                 if (cube.orangeSide.upEdge == Color.orange && cube.yellowSide.rightEdge == Color.white)
                 {
                     solution.Add(cube.RDouble());
-                    i++;
                 }
                 if (cube.redSide.upEdge == Color.red && cube.yellowSide.leftEdge == Color.white)
                 {
                     solution.Add(cube.LDouble());
-                    i++;
                 }
                 if (cube.blueSide.downEdge == Color.blue && cube.yellowSide.upEdge == Color.white)
                 {
                     solution.Add(cube.BDouble());
-                    i++;
                 }
                 solution.Add(cube.U());
+                if (Checking(cube))
+                {
+                    PrintSolution(ref solution);
+                }
+            }
+        }
+        static void WhiteSideSolve(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.orangeSide.upLeftAngle == Color.white)
+            {
+                if(cube.yellowSide.downRightAngle == Color.orange)
+                {
+                    solution.Add(cube.R());
+                    solution.Add(cube.U());
+                    solution.Add(cube.RContr());
+                }
+                else if(cube.yellowSide.downRightAngle == Color.blue)
+                {
+
+                }
             }
         }
     }

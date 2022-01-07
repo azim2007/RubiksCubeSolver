@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using RubiksCube;
 
@@ -110,13 +111,14 @@ namespace RubicsCubeSolver
                     {
                         solution[i] = Convert.ToString(solution[i][0]) + "\'";
                     }
-                    i--;
+                    i = i - 2;
                 }
             }
         }
         static void Main(string[] args)
         {
             Cube cube = new Cube();
+            Stopwatch solvingTime = new Stopwatch();
             List<string> solution = new List<string>();
             Color[][] colors = new Color[6][];
             for(int j = 0; j < 6; j++)
@@ -130,6 +132,7 @@ namespace RubicsCubeSolver
             }
             InputCube(colors, ref cube);
             PrintCube(ref cube);
+            solvingTime.Start();
             Console.WriteLine();
             if(Checking(cube))
             {
@@ -144,10 +147,19 @@ namespace RubicsCubeSolver
             {
                 WhiteSideSolve(ref cube, ref solution);
             }
+            for (int i = 0; i < 4; i++)
+            {
+                SecondLayerSolve(ref cube, ref solution);
+            }
             PrintSolution(ref solution);
             OptimizeSolution(ref solution);
             Console.WriteLine();
             PrintSolution(ref solution);
+            Console.WriteLine();
+            PrintCube(ref cube);
+            Console.WriteLine();
+            solvingTime.Stop();
+            Console.WriteLine("\nвремя: " + solvingTime.Elapsed);
         }
         static void PifPaf(ref Cube cube, ref List<string> solution)
         {
@@ -367,7 +379,7 @@ namespace RubicsCubeSolver
         }
         static void CrossSolve(ref Cube cube, ref List<string> solution)
         {
-            while(cube.whiteSide.upEdge != Color.white)
+            while(cube.whiteSide.upEdge != Color.white || cube.whiteSide.rightEdge != Color.white || cube.whiteSide.downEdge != Color.white || cube.whiteSide.leftEdge != Color.white)
             {
                 if (cube.greenSide.upEdge == Color.green && cube.yellowSide.downEdge == Color.white)
                 {
@@ -612,6 +624,173 @@ namespace RubicsCubeSolver
                 solution.Add(cube.UContr());
                 solution.Add(cube.R());
                 WhiteSideSolve(ref cube, ref solution);
+            }
+        }
+        static void SecondLayerSolve(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.yellowSide.downEdge != Color.yellow && cube.greenSide.upEdge != Color.yellow)
+            {
+                SecondLayerEdgesCheck(ref cube, ref solution);
+            }
+            else if(cube.yellowSide.rightEdge != Color.yellow && cube.orangeSide.upEdge != Color.yellow)
+            {
+                solution.Add(cube.U());
+                SecondLayerEdgesCheck(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upEdge != Color.yellow && cube.blueSide.downEdge != Color.yellow)
+            {
+                solution.Add(cube.UDouble());
+                SecondLayerEdgesCheck(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.leftEdge != Color.yellow && cube.redSide.upEdge != Color.yellow)
+            {
+                solution.Add(cube.UContr());
+                SecondLayerEdgesCheck(ref cube, ref solution);
+            }
+            else if (cube.greenSide.rightEdge != Color.green && cube.orangeSide.leftEdge != Color.orange)
+            {
+                solution.Add(cube.R());
+                solution.Add(cube.U());
+                solution.Add(cube.RContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.FContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.F());
+                SecondLayerSolve(ref cube, ref solution);
+            }
+            else if (cube.blueSide.leftEdge != Color.blue && cube.redSide.leftEdge != Color.red)
+            {
+                solution.Add(cube.L());
+                solution.Add(cube.U());
+                solution.Add(cube.LContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.BContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.B());
+                SecondLayerSolve(ref cube, ref solution);
+            }
+            else if (cube.blueSide.rightEdge != Color.blue && cube.orangeSide.rightEdge != Color.orange)
+            {
+                solution.Add(cube.RContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.R());
+                solution.Add(cube.U());
+                solution.Add(cube.B());
+                solution.Add(cube.U());
+                solution.Add(cube.BContr());
+                SecondLayerSolve(ref cube, ref solution);
+            }
+            else if (cube.greenSide.leftEdge != Color.green && cube.redSide.rightEdge != Color.red)
+            {
+                solution.Add(cube.LContr());
+                solution.Add(cube.UContr());
+                solution.Add(cube.L());
+                solution.Add(cube.U());
+                solution.Add(cube.F());
+                solution.Add(cube.U());
+                solution.Add(cube.FContr());
+                SecondLayerSolve(ref cube, ref solution);
+            }
+        }
+        static void SecondLayerEdgesCheck(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.greenSide.upEdge == Color.green)
+            {
+                if(cube.yellowSide.downEdge == Color.orange)
+                {
+                    solution.Add(cube.U());
+                    solution.Add(cube.R());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.RContr());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.FContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.F());
+                }
+                else if(cube.yellowSide.downEdge == Color.red)
+                {
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.LContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.L());
+                    solution.Add(cube.U());
+                    solution.Add(cube.F());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.FContr());
+                }
+            }
+            else if(cube.greenSide.upEdge == Color.orange)
+            {
+                if(cube.yellowSide.downEdge == Color.green)
+                {
+                    solution.Add(cube.UDouble());
+                    solution.Add(cube.FContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.F());
+                    solution.Add(cube.U());
+                    solution.Add(cube.R());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.RContr());
+                }
+                else if(cube.yellowSide.downEdge == Color.blue)
+                {
+                    solution.Add(cube.B());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.BContr());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.RContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.R());
+                }
+            }
+            else if(cube.greenSide.upEdge == Color.blue)
+            {
+                if(cube.yellowSide.downEdge == Color.orange)
+                {
+                    solution.Add(cube.U());
+                    solution.Add(cube.RContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.R());
+                    solution.Add(cube.U());
+                    solution.Add(cube.B());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.BContr());
+                }
+                else if(cube.yellowSide.downEdge == Color.red)
+                {
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.L());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.LContr());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.BContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.B());
+                }
+            }
+            else if (cube.greenSide.upEdge == Color.red)
+            {
+                if (cube.yellowSide.downEdge == Color.green)
+                {
+                    solution.Add(cube.UDouble());
+                    solution.Add(cube.F());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.FContr());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.LContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.L());
+                }
+                else if (cube.yellowSide.downEdge == Color.blue)
+                {
+                    solution.Add(cube.BContr());
+                    solution.Add(cube.U());
+                    solution.Add(cube.B());
+                    solution.Add(cube.U());
+                    solution.Add(cube.L());
+                    solution.Add(cube.UContr());
+                    solution.Add(cube.LContr());
+                }
             }
         }
     }

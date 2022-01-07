@@ -151,11 +151,17 @@ namespace RubicsCubeSolver
             {
                 SecondLayerSolve(ref cube, ref solution);
             }
-            PrintSolution(ref solution);
+            YellowCrossSolve(ref cube, ref solution);
+            YellowSideSolve(ref cube, ref solution);
+            ThirdLayerAnglesSolving(ref cube, ref solution);
+            ThirdLayerEdgesSolving(ref cube, ref solution);
+            FinalMove(ref cube, ref solution);
+            //PrintSolution(ref solution);
             OptimizeSolution(ref solution);
-            Console.WriteLine();
+            //Console.WriteLine();
             PrintSolution(ref solution);
             Console.WriteLine();
+            Console.WriteLine("ходов: " + solution.Count);
             PrintCube(ref cube);
             Console.WriteLine();
             solvingTime.Stop();
@@ -167,6 +173,67 @@ namespace RubicsCubeSolver
             solution.Add(cube.U());
             solution.Add(cube.RContr());
             solution.Add(cube.UContr());
+        }
+        static void RightFish(ref Cube cube, ref List<string> solution)
+        {
+            solution.Add(cube.R());
+            solution.Add(cube.U());
+            solution.Add(cube.RContr());
+            solution.Add(cube.U());
+            solution.Add(cube.R());
+            solution.Add(cube.UDouble());
+            solution.Add(cube.RContr());
+        }
+        static void LeftFish(ref Cube cube, ref List<string> solution)
+        {
+            solution.Add(cube.LContr());
+            solution.Add(cube.UContr());
+            solution.Add(cube.L());
+            solution.Add(cube.UContr());
+            solution.Add(cube.LContr());
+            solution.Add(cube.UDouble());
+            solution.Add(cube.L());
+        }
+        static void Lambda(ref Cube cube, ref List<string> solution)
+        {
+            solution.Add(cube.R());
+            solution.Add(cube.U());
+            solution.Add(cube.RContr());
+            solution.Add(cube.FContr());
+            PifPaf(ref cube, ref solution);
+            solution.Add(cube.RContr());
+            solution.Add(cube.F());
+            solution.Add(cube.RDouble());
+            solution.Add(cube.UContr());
+            solution.Add(cube.RContr());
+        }
+        static void RightTPerm(ref Cube cube, ref List<string> solution)
+        {
+            solution.Add(cube.R());
+            solution.Add(cube.UContr());
+            solution.Add(cube.R());
+            solution.Add(cube.U());
+            solution.Add(cube.R());
+            solution.Add(cube.U());
+            solution.Add(cube.R());
+            solution.Add(cube.UContr());
+            solution.Add(cube.RContr());
+            solution.Add(cube.UContr());
+            solution.Add(cube.RDouble());
+        }
+        static void LeftTPerm(ref Cube cube, ref List<string> solution)
+        {
+            solution.Add(cube.LContr());
+            solution.Add(cube.U());
+            solution.Add(cube.LContr());
+            solution.Add(cube.UContr());
+            solution.Add(cube.LContr());
+            solution.Add(cube.UContr());
+            solution.Add(cube.LContr());
+            solution.Add(cube.U());
+            solution.Add(cube.L());
+            solution.Add(cube.U());
+            solution.Add(cube.LDouble());
         }
         static bool Checking(Cube cube)
         {
@@ -791,6 +858,142 @@ namespace RubicsCubeSolver
                     solution.Add(cube.UContr());
                     solution.Add(cube.LContr());
                 }
+            }
+        }
+        static void YellowCrossSolve(ref Cube cube, ref List<string> solution)
+        {
+            if (cube.yellowSide.downEdge != Color.yellow && cube.yellowSide.rightEdge == Color.yellow && cube.yellowSide.leftEdge == Color.yellow)
+            {
+                solution.Add(cube.F());
+                PifPaf(ref cube, ref solution);
+                solution.Add(cube.FContr());
+            }
+            else if(cube.yellowSide.downEdge != Color.yellow && cube.yellowSide.upEdge == Color.yellow && cube.yellowSide.leftEdge == Color.yellow)
+            {
+                solution.Add(cube.F());
+                PifPaf(ref cube, ref solution);
+                solution.Add(cube.FContr());
+                YellowCrossSolve(ref cube, ref solution);
+            }
+            else if(cube.yellowSide.downEdge != Color.yellow && cube.yellowSide.rightEdge != Color.yellow && cube.yellowSide.leftEdge != Color.yellow)
+            {
+                solution.Add(cube.F());
+                PifPaf(ref cube, ref solution);
+                solution.Add(cube.FContr());
+                YellowCrossSolve(ref cube, ref solution);
+            }
+            else if(cube.yellowSide.downEdge == Color.yellow && cube.yellowSide.upEdge == Color.yellow && cube.yellowSide.leftEdge == Color.yellow)
+            {
+
+            }
+            else
+            {
+                solution.Add(cube.U());
+                YellowCrossSolve(ref cube, ref solution);
+            }
+        }
+        static void YellowSideSolve(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.yellowSide.downLeftAngle == Color.yellow && cube.greenSide.upRightAngle == Color.yellow && cube.orangeSide.upRightAngle == Color.yellow && cube.blueSide.downLeftAngle == Color.yellow)
+            {
+                RightFish(ref cube, ref solution);
+            }
+            else if(cube.yellowSide.downRightAngle == Color.yellow && cube.greenSide.upLeftAngle == Color.yellow && cube.redSide.upLeftAngle == Color.yellow && cube.blueSide.downRightAngle == Color.yellow)
+            {
+                LeftFish(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upRightAngle == Color.yellow && cube.yellowSide.upLeftAngle == Color.yellow && cube.greenSide.upLeftAngle == Color.yellow && cube.greenSide.upRightAngle == Color.yellow)
+            {
+                RightFish(ref cube, ref solution);
+                YellowSideSolve(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upRightAngle == Color.yellow && cube.yellowSide.downRightAngle == Color.yellow && cube.greenSide.upLeftAngle == Color.yellow && cube.blueSide.downLeftAngle == Color.yellow)
+            {
+                RightFish(ref cube, ref solution);
+                YellowSideSolve(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upRightAngle == Color.yellow && cube.yellowSide.upLeftAngle == Color.yellow && cube.greenSide.upLeftAngle == Color.yellow && cube.greenSide.upRightAngle == Color.yellow)
+            {
+                RightFish(ref cube, ref solution);
+                YellowSideSolve(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upRightAngle == Color.yellow && cube.yellowSide.downLeftAngle == Color.yellow && cube.greenSide.upRightAngle == Color.yellow && cube.redSide.upLeftAngle == Color.yellow)
+            {
+                LeftFish(ref cube, ref solution);
+                YellowSideSolve(ref cube, ref solution);
+            }
+            else if (cube.orangeSide.upRightAngle == Color.yellow && cube.orangeSide.upLeftAngle == Color.yellow && cube.redSide.upRightAngle == Color.yellow && cube.redSide.upLeftAngle == Color.yellow)
+            {
+                RightFish(ref cube, ref solution);
+                YellowSideSolve(ref cube, ref solution);
+            }
+            else if (cube.greenSide.upRightAngle == Color.yellow && cube.blueSide.downRightAngle == Color.yellow && cube.redSide.upRightAngle == Color.yellow && cube.redSide.upLeftAngle == Color.yellow)
+            {
+                RightFish(ref cube, ref solution);
+                YellowSideSolve(ref cube, ref solution);
+            }
+            else if (cube.yellowSide.upRightAngle == Color.yellow && cube.yellowSide.upLeftAngle == Color.yellow && cube.yellowSide.downLeftAngle == Color.yellow && cube.yellowSide.downRightAngle == Color.yellow)
+            {
+
+            }
+            else
+            {
+                solution.Add(cube.U());
+                YellowSideSolve(ref cube, ref solution);
+            }
+            
+        }
+        static void ThirdLayerAnglesSolving(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.greenSide.upRightAngle != cube.greenSide.upLeftAngle && cube.redSide.upRightAngle != cube.redSide.upLeftAngle && cube.orangeSide.upRightAngle != cube.orangeSide.upLeftAngle && cube.blueSide.downRightAngle != cube.blueSide.downLeftAngle)
+            {
+                Lambda(ref cube, ref solution);
+                ThirdLayerAnglesSolving(ref cube, ref solution);
+            }
+            else if(cube.redSide.upRightAngle == cube.redSide.upLeftAngle)
+            {
+                Lambda(ref cube, ref solution);
+            }
+            else if(cube.greenSide.upRightAngle == cube.greenSide.upLeftAngle && cube.redSide.upRightAngle == cube.redSide.upLeftAngle && cube.orangeSide.upRightAngle == cube.orangeSide.upLeftAngle && cube.blueSide.downRightAngle == cube.blueSide.downLeftAngle)
+            {
+
+            }
+            else
+            {
+                solution.Add(cube.U());
+                ThirdLayerAnglesSolving(ref cube, ref solution);
+            }
+        }
+        static void ThirdLayerEdgesSolving(ref Cube cube, ref List<string> solution)
+        {
+            if(cube.orangeSide.upEdge != cube.orangeSide.upRightAngle && cube.greenSide.upEdge != cube.greenSide.upRightAngle && cube.redSide.upEdge != cube.redSide.upRightAngle && cube.blueSide.downEdge != cube.blueSide.downRightAngle)
+            {
+                RightTPerm(ref cube, ref solution);
+                ThirdLayerEdgesSolving(ref cube, ref solution);
+            }
+            else if(cube.blueSide.downEdge == cube.blueSide.downRightAngle && ((int)cube.orangeSide.upEdge - (int)cube.orangeSide.upRightAngle == 1 || (int)cube.orangeSide.upEdge - (int)cube.orangeSide.upRightAngle == -1) && (cube.orangeSide.upEdge != Color.blue || cube.orangeSide.upRightAngle != Color.orange) && (cube.orangeSide.upEdge != Color.orange || cube.orangeSide.upRightAngle != Color.blue))
+            {
+                RightTPerm(ref cube, ref solution);
+            }
+            else if (cube.blueSide.downEdge == cube.blueSide.downRightAngle && ((int)cube.redSide.upEdge - (int)cube.redSide.upRightAngle == 1 || (int)cube.redSide.upEdge - (int)cube.redSide.upRightAngle == -1) && (cube.redSide.upEdge != Color.blue || cube.redSide.upRightAngle != Color.orange) && (cube.redSide.upEdge != Color.orange || cube.redSide.upRightAngle != Color.blue))
+            {
+                LeftTPerm(ref cube, ref solution);
+            }
+            else if(cube.orangeSide.upEdge == cube.orangeSide.upRightAngle && cube.greenSide.upEdge == cube.greenSide.upRightAngle && cube.redSide.upEdge == cube.redSide.upRightAngle && cube.blueSide.downEdge == cube.blueSide.downRightAngle)
+            {
+
+            }
+            else
+            {
+                solution.Add(cube.U());
+                ThirdLayerEdgesSolving(ref cube, ref solution);
+            }
+        }
+        static void FinalMove(ref Cube cube, ref List<string> solution)
+        {
+            while(cube.greenSide.upRightAngle != Color.green)
+            {
+                solution.Add(cube.U());
             }
         }
     }

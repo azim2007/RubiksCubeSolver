@@ -58,9 +58,30 @@ namespace RubicsCubeSolver
         }
         static void PrintSolution(ref List<string> solution)
         {
+            Console.WriteLine("решение:");
             for(int i = 0; i < solution.Count; i++)
             {
                 Console.Write(solution[i] + " ");
+            }
+        }
+        static void PrintScramble(ref List<string> solution)
+        {
+            Console.WriteLine("скрамбл:");
+            for (int i = solution.Count - 1; i >= 0; i--)
+            {
+                if(solution[i][1] == ' ')
+                {
+                    Console.Write(solution[i][0] + "' ");
+                }
+                else if (solution[i][1] == '\'')
+                {
+                    Console.Write(solution[i][0] + " ");
+                }
+                else
+                {
+                    Console.Write(solution[i] + " ");
+                }
+
             }
         }
         static void OptimizeSolution(ref List<string> solution)
@@ -159,6 +180,8 @@ namespace RubicsCubeSolver
             //PrintSolution(ref solution);
             OptimizeSolution(ref solution);
             //Console.WriteLine();
+            PrintScramble(ref solution);
+            Console.WriteLine();
             PrintSolution(ref solution);
             Console.WriteLine();
             Console.WriteLine("ходов: " + solution.Count);
